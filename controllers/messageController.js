@@ -1,4 +1,4 @@
-exports.index = function (req, res,){
+exports.index = function (req, res){
 
     //load all messages from db, and pass them to the view
     //pass the user object to the view, will be undefined if not logged in 
@@ -6,11 +6,13 @@ exports.index = function (req, res,){
     // logged in has option to create
     // member, sees names
     // admin sees delete option
-    res.send("NOT IMPLEMENTED: Message Controller Index Page")
+    res.render("index", {title:"Messages"})
+    // res.send("NOT IMPLEMENTED: Message Controller Index Page")
 }
 
 exports.message_get = (req, res,) =>{
-    res.send("NOT IMPLEMENTED: Message Controller GET MESSAGE CREATE")
+    
+    res.render("message-form", {title:"Create Message"})
 }
 
 exports.message_post = (req, res,) =>{

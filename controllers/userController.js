@@ -1,5 +1,5 @@
 exports.signup_get = (req,res) =>{
-    res.send("NOT IMPLEMENTD: UserController SIGN UP GET")
+    res.render("sign-up-form", {title:"Sign up"})
 }
 
 exports.signup_post = (req,res) =>{
@@ -7,7 +7,7 @@ exports.signup_post = (req,res) =>{
 }
 
 exports.signin_get = (req,res) =>{
-    res.send("NOT IMPLEMENTD: UserController SIGN IN GET")
+    res.render("sign-in-form", {title:"Sign in"})
 }
 
 exports.signin_post = (req,res) =>{

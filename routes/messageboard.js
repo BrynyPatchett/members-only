@@ -10,9 +10,9 @@ router.get('/sign-up', userController.signup_get);
 
 router.post('/sign-up', userController.signup_post);
 
-router.get('/sign-in', userController.signup_get);
+router.get('/sign-in', userController.signin_get);
 
-router.post('/sign-in', userController.signup_post);
+router.post('/sign-in', userController.signin_post);
 
 router.get('/message/create', messageController.message_get);
 

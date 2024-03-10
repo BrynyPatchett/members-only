@@ -1,0 +1,42 @@
+<%-include('header',{title:title}) %>
+  <body>
+    <div class="content-container">
+        <div class="sign-in">
+        <h1><%= title %></h1>
+        <form method="POST">
+            <div class="sign-in-form">
+                <div class="form-input">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" required id="username" placeholder="username"
+                    value='<%=  typeof user === "undefined" ? `` : user.username %>'>
+                </div>
+                <div class="form-input">
+                    <label for="firstname">First Name</label>
+                    <input type="text" name="firstname" required id="firstname" placeholder="firstname"
+                    value='<%=  typeof user === "undefined" ? `` : user.firstname %>'>
+                </div>
+                <div class="form-input">
+                    <label for="lastname">Last Name</label>
+                    <input type="text" name="lastname" required id="lastname" placeholder="lastname"
+                    value='<%=  typeof user === "undefined" ? `` : user.lastname %>'>
+                </div>
+                <div class="form-input">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" required id="password" placeholder="password">
+                </div>
+                <div class="form-input">
+                    <label for="confirmpassword">Confirm Password</label>
+                    <input type="password" name="confirmpassword" required id="confirmpassword" placeholder="confirm password">
+                </div>
+                <div class="form-input">
+                    <input type="submit" value="Submit">
+                </div>
+            </div>
+        </form>
+        <%if(typeof errors != "undefined"){ %>
+            <p>errors go here</p>
+          <% } %>
+        </div>
+    </div>
+  </body>
+</html>
