@@ -13,3 +13,11 @@ exports.signin_get = (req,res) =>{
 exports.signin_post = (req,res) =>{
     res.send("NOT IMPLEMENTD: UserController SIGN IN POST")
 }
+
+exports.account_get = (req,res) =>{
+    res.render("account", {title:"Account"})
+}
+
+exports.account_post = (req,res) =>{
+    res.send("NOT IMPLEMENTD: UserController Account POST")
+}

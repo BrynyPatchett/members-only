@@ -68,7 +68,7 @@ a {
   border-radius: 10px;
   background-color: beige;
   width: 100%;
-
+  padding-bottom: 20px;
 }
 
 .message-detail{
@@ -80,4 +80,8 @@ a {
   max-width: 75ch;
   display: flex;
  align-self: center;
+}
+
+.accountbar{
+  text-align: end;
 }
