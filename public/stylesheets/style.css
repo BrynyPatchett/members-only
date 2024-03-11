@@ -18,7 +18,8 @@ a {
 }
 
 .sign-in{
-  padding: 100px 150px;
+  margin:  100px 150px; 
+  padding: 0 150px;
   display: flex;
   align-items: center;
   justify-content: center;

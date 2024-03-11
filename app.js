@@ -6,6 +6,10 @@ var dotenv = require('dotenv')
 var mongoose = require('mongoose')
 var session = require('express-session')
 var MongoStore = require('connect-mongo');
+var passport = require('passport')
+var localStrategy = require('passport-local').Strategy
+const User = require('./models/user')
+
 
 
 dotenv.config();
@@ -23,6 +27,12 @@ main().catch(err => console.log(`Failed to connect to database: ${err}`))
 const mongoSessionStore =  MongoStore.create({
   client:mongoose.connection.getClient()
 })
+
+const strategy = new localStrategy(
+  function(username,password,done){
+
+})
+
 
 var app = express();
 
