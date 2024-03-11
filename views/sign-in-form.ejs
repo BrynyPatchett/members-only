@@ -20,7 +20,7 @@
             </div>
         </form>
         <%if(typeof errors != "undefined"){ %>
-            <% errors.forEach((x) => { %>
+            <% errors.forEach((error) => { %>
                 <p><%= error.msg%></p>
             <% })%>
           <% } %>
