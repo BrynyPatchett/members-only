@@ -6,7 +6,8 @@ exports.index = function (req, res){
     // logged in has option to create
     // member, sees names
     // admin sees delete option
-    res.render("index", {title:"Messages"})
+    console.log(req.user)
+    res.render("index", {title:"Messages",user:req.user})
     // res.send("NOT IMPLEMENTED: Message Controller Index Page")
 }
 

@@ -62,7 +62,8 @@ exports.signin_get = (req, res) => {
 exports.signin_post = (req, res) => {
     // console.log(req.user)
     // console.log(req.session)
-    res.send("NOT IMPLEMENTD: UserController SIGN IN POST")
+    res.redirect("/messageboard")
+    // res.send("NOT IMPLEMENTD: UserController SIGN IN POST")
 }
 
 exports.account_get = (req, res) => {
