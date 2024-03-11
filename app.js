@@ -28,12 +28,6 @@ const mongoSessionStore =  MongoStore.create({
   client:mongoose.connection.getClient()
 })
 
-const strategy = new localStrategy(
-  function(username,password,done){
-
-})
-
-
 var app = express();
 
 // view engine setup
@@ -53,8 +47,9 @@ app.use(session({
   }
 }))
 
-
-
+require('./passport/passport')
+app.use(passport.initialize())
+app.use(passport.session())
 
 app.use(express.static(path.join(__dirname, 'public')));
 

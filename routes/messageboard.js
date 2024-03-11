@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var userController = require("../controllers/userController")
 var messageController = require("../controllers/messageController")
+var passport = require('passport');
 
 /* GET home page. */
 router.get('/', messageController.index);
@@ -12,7 +13,7 @@ router.post('/sign-up', userController.signup_post);
 
 router.get('/sign-in', userController.signin_get);
 
-router.post('/sign-in', userController.signin_post);
+router.post('/sign-in',passport.authenticate('local'), userController.signin_post);
 
 router.get('/account', userController.account_get);
 

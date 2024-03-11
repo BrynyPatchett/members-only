@@ -25,7 +25,6 @@ asyncHandler(async (req, res,next) => {
         firstname: req.body.firstname,
         lastname: req.body.lastname,
     })
-    console.log(user)
     if (!errors.isEmpty()) {
         res.render("sign-up-form", { title: "Sign up", user: user, errors:errors.array()})
         return
@@ -61,6 +60,8 @@ exports.signin_get = (req, res) => {
 }
 
 exports.signin_post = (req, res) => {
+    // console.log(req.user)
+    // console.log(req.session)
     res.send("NOT IMPLEMENTD: UserController SIGN IN POST")
 }
 
