@@ -75,6 +75,7 @@ a {
 .message-detail{
   display: flex;
   gap:5px;
+  justify-content: space-between;
 }
 
 .message-content{
@@ -88,4 +89,9 @@ a {
   justify-content: end;
   margin: 10px;
   gap: 10px;
+}
+
+.message-post{
+  display: flex;
+  gap:10px;
 }

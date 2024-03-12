@@ -57,6 +57,12 @@ asyncHandler(async (req, res) => {
     })
 ]
 exports.signin_get = (req, res) => {
+    if(req.session.messages){
+        const errors = [{msg: req.session.messages[0]}]
+        delete req.session.messages
+        res.render("sign-in-form", { title: "Sign in",errors:errors })
+        return;
+    }
     res.render("sign-in-form", { title: "Sign in" })
 }
 
@@ -82,3 +88,24 @@ exports.logout_post = (req, res,next) => {
         res.redirect('/');
       });
 }
+
+exports.signin_post_validation = [
+    body("username")
+    .trim()
+    .isLength({ min: 5 })
+    .escape()
+    .withMessage("Username must be 5 or more characters")
+    .isAlphanumeric().withMessage("username must be Alphanumeric Only"),
+    body("password").trim().isLength({ min: 3 }).escape().withMessage("password must be 3 or more characters"),
+    asyncHandler(async (req, res,next) => {
+    const errors = validationResult(req);
+    let user =  new User({
+        username: req.body.username
+    })
+    if (!errors.isEmpty()) {
+        res.render("sign-in-form", { title: "Sign in", user: user, errors:errors.array()})
+        return
+    }
+    next()
+    })
+]

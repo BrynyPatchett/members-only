@@ -13,7 +13,7 @@ router.post('/sign-up', userController.signup_post);
 
 router.get('/sign-in', userController.signin_get);
 
-router.post('/sign-in',passport.authenticate('local'), userController.signin_post);
+router.post('/sign-in',userController.signin_post_validation,passport.authenticate('local',{failureRedirect: '/messageboard/sign-in', failureMessage: true}), userController.signin_post);
 
 router.get('/account', userController.account_get);
 

@@ -8,7 +8,7 @@ const strategy = new localStrategy(
       try{
       const user = await User.findOne({username:username});
       if(!user){
-        return done(null,false)
+        return done(null,false, {message:"user not found"})
       }
       const validPassword = await bcrypt.compare(password,user.password);
       if(!validPassword){
