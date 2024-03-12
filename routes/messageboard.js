@@ -19,6 +19,8 @@ router.get('/account', userController.account_get);
 
 router.post('/account', userController.account_post);
 
+router.post('/logout', userController.logout_post);
+
 router.get('/message/create', messageController.message_get);
 
 router.post('/message/create', messageController.message_post);

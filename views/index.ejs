@@ -1,7 +1,7 @@
 <%-include('header',{title:title}) %>
 
   <body>
-    <%-include('accountBar',{title:title,user:typeof user === "undefined" ? '' : user}) %>
+    <%-include('accountBar',{title:title,user:typeof user === "undefined" ? undefined : user}) %>
     <div class="messages-title">
       <h1>
         <%= title %>

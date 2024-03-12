@@ -2,6 +2,7 @@ const User = require("../models/user")
 const { body, validationResult } = require("express-validator");
 const asyncHandler = require("express-async-handler")
 const bcrypt = require("bcryptjs")
+const passport = require("passport")
 
 
 exports.signup_get = async (req, res) => {
@@ -72,4 +73,12 @@ exports.account_get = (req, res) => {
 
 exports.account_post = (req, res) => {
     res.send("NOT IMPLEMENTD: UserController Account POST")
+}
+
+exports.logout_post = (req, res,next) => {
+    console.log(req.session)
+    req.logout(function(err) {
+        if (err) { return next(err); }
+        res.redirect('/');
+      });
 }

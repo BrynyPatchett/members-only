@@ -84,5 +84,8 @@ a {
 }
 
 .accountbar{
-  text-align: end;
+  display: flex;
+  justify-content: end;
+  margin: 10px;
+  gap: 10px;
 }
