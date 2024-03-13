@@ -71,7 +71,7 @@ exports.signin_post = (req, res) => {
 }
 
 exports.account_get = (req, res) => {
-    res.render("account", { title: "Account" })
+    res.render("account", { title: "Account", user:req.user })
 }
 
 exports.account_post = (req, res) => {

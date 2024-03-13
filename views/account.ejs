@@ -1,10 +1,15 @@
 <%-include('header',{title:title}) %>
-  <body>
+  <body><%-include('accountBar',{title:title,user:typeof user === "undefined" ? undefined : user}) %>
     <div class="content-container">
-        <div class="sign-in">
-         <%if(typeof user != "undefined"){ %>     
+        <div class="sign-in">   
         <h1><%= title %></h1>
+        <%if (typeof user != "undefined"){ %>  
         <form method="POST">
+          <p>Username: <%= user.username %></p>
+          <p>Firstname: <%= user.firstname %></p>
+          <p>Lastname: <%= user.lastname %></p>
+          <p>Membership: <%= user.membership_status %></p>
+          <%if (user.membership_status === 'User'){ %>  
             <div class="sign-in-form">
                 <div class="form-input">
                     <label for="password">Membership Upgrade Passphrase</label>
@@ -14,14 +19,19 @@
                     <input type="submit" value="Submit">
                 </div>
             </div>
+            <% } %>
         </form>
-        <%if(typeof errors != "undefined"){ %>
-            <p>errors go here</p>
-          <% } %>
         </div>
         <% }else{ %>
             <p>Please <a href="/messageboard/sign-in">Sign in </a></p>
          <% } %>
     </div>
+    <%if(typeof errors != "undefined"){ %>
+      <ul>
+      <% errors.forEach((error) => { %>
+          <li><%= error.msg%></li>
+      <% })%>
+      </ul>
+    <% } %>
   </body>
 </html>

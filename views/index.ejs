@@ -8,12 +8,20 @@
       </h1>
     </div>
     <div class="message-container">
+      <% if (user){ %>
+        <div class="message-button">
+         <a href="/messageboard/message/create"><button>Post a new message</button></a>
+        </div>
+        <% } %>
       <div class="messages">
+        <% messages.forEach((message) => { %>
         <div class="message">
           <div class="message-detail">
             <div class="message-post">
             <% if (user && (user.membership_status === 'Member' || user.membership_status === 'Admin')) { %>
-            <div>user</div>
+            <div><%= message.author.name %></div>
+            <% }else{%>
+              <div><i>anonymous</i></div>
             <% }%>
             <div>date</div>
             </div>
@@ -21,9 +29,10 @@
             <div>Delete</div>
             <% }%>
           </div>
-          <div class="message-content">content of message here with a really really super long super reall lng a really bug message that was written around the time where they had really long messages, you, I and all of us cannot believe how long this message really is.</div>
+          <div class="message-content"><%=message.message %></div>
         </div>
-        </div>
+        <% }) %>
+      </div>
       </div>
   </body>
 

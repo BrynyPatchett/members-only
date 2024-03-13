@@ -95,3 +95,7 @@ a {
   display: flex;
   gap:10px;
 }
+
+.message-button{
+  margin:10px
+}

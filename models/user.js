@@ -9,5 +9,8 @@ const UserSchema = new Schema({
     membership_status:{type:String,required:true,enum:["User","Member","Admin"],default:"User"}
 })
 
+UserSchema.virtual("name").get(function(){
+    return `${this.firstname} ${this.lastname}`
+})
 
 module.exports = mongoose.model("User",UserSchema)

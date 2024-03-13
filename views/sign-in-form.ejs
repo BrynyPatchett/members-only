@@ -1,5 +1,6 @@
 <%-include('header',{title:title}) %>
   <body>
+    <%-include('accountBar',{title:title,user:typeof user === "undefined" ? undefined : user}) %>
     <div class="content-container">
         <div class="sign-in">
         <h1><%= title %></h1>
@@ -19,6 +20,7 @@
                 </div>
             </div>
         </form>
+        <p>Need to create an account? <a href="/messageboard/sign-up">Sign Up</a></p>
         <%if(typeof errors != "undefined"){ %>
             <% errors.forEach((error) => { %>
                 <p><%= error.msg%></p>
