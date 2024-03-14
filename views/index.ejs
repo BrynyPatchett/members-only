@@ -19,7 +19,7 @@
           <div class="message-detail">
             <div class="message-post">
             <% if (user && (user.membership_status === 'Member' || user.membership_status === 'Admin')) { %>
-            <div><%= message.author.name %></div>
+            <div><i><%= user.id === message.author.id ?'You' : message.author.name %></i></div>
             <% }else{%>
               <div><i>anonymous</i></div>
             <% }%>
@@ -28,11 +28,12 @@
             <% if (user && user.membership_status === 'Admin') { %>
               <form action="/messageboard/message/delete" method="post">
                 <input type="hidden" name="messageid" value="<%=message._id%>" >
-                <button type="submit" >delete</button>
+                <button type="submit">Delete</button>
               </form>
             <% }%>
           </div>
-          <div class="message-content"><%=message.message %></div>
+          <div class="message-title"><h3><%=message.title %></h3></div>
+          <div class="message-content"><p><%=message.message %></p></div>
         </div>
         <% }) %>
       </div>

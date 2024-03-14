@@ -7,9 +7,13 @@
         <%if (typeof user != "undefined"){ %>  
         <form method="POST">
             <div class="sign-in-form">
+              <div class="form-input">
+                <label for="title">Title</label>
+                <input  name="title" required id="title" placeholder="title" value="<%= typeof message === `undefined` ? '' : message.title %>">
+            </div>
                 <div class="form-input">
                     <label for="message">Message</label>
-                    <textarea  name="message" required id="message" placeholder="message" rows="8" cols="50" style="resize: none"><%= typeof message === "undefined" ? '' : message %></textarea>
+                    <textarea  name="message" required id="message" placeholder="message" rows="8" cols="50" style="resize: none"><%= typeof message === "undefined" ? '' : message.message %></textarea>
                 </div>
                 <div class="form-input">
                     <input type="submit" value="Submit">

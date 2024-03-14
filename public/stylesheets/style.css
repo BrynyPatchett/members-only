@@ -67,7 +67,8 @@ a {
   display: flex;
   flex-direction: column;
   border-radius: 10px;
-  background-color: beige;
+  box-shadow: 0px 0px 10px rgb(159, 159, 159);
+  background-color: whitesmoke;
   width: 100%;
   padding-bottom: 20px;
 }
@@ -87,8 +88,15 @@ a {
 .accountbar{
   display: flex;
   justify-content: end;
+  align-items: center;
   margin: 10px;
   gap: 10px;
+  >a{
+    color: black;
+    &:hover{
+      color: rgb(129, 129, 129);
+    }
+  }
 }
 
 .message-post{
@@ -98,4 +106,31 @@ a {
 
 .message-button{
   margin:10px
+}
+
+.message-title{
+  display: flex;
+  justify-content: center;
+}
+
+button{
+  padding: 5px;
+  border-radius: 10px;
+  border: none;
+  background-color: #00B7FF;
+  color: white;
+  &:hover{
+    background-color: #039cd8;
+  }
+}
+
+input[type=submit]{
+  padding: 5px;
+  border-radius: 10px;
+  border: none;
+  background-color: #00B7FF;
+  color: white;
+  &:hover{
+    background-color: #039cd8;
+  }
 }

@@ -5,7 +5,7 @@ const Message = require('../models/message');
 
 
 exports.index = asyncHandler(async (req, res) => {
-    const messages = await Message.find().sort({ date: 1 }).populate("author", 'firstname lastname').exec()
+    const messages = await Message.find().sort({ date: 1 }).populate("author", 'firstname lastname id').exec()
     //load all messages from db, and pass them to the view
     //pass the user object to the view, will be undefined if not logged in 
     // view decides: Not logged in/ logged in not a member, show messages w/o names,
@@ -29,17 +29,18 @@ exports.message_post = [(req, res, next) => {
     }
 },
 body("message", "Message must not be empty").trim().isLength({ min: 1, max: 200 }).withMessage("Message must be between 1 and 200 characters").escape(),
+body("title", "title must not be empty").trim().isLength({ min: 1, max: 30 }).withMessage("Title must be between 1 and 30 characters").escape(),
 asyncHandler(async (req, res,) => {
     console.log(req.body.message.length)
     const errors = validationResult(req);
     const message = new Message({
         author: req.user._id,
         message: req.body.message,
-        title: 'placeholder'
+        title: req.body.title
     })
     console.log(errors)
     if (!errors.isEmpty()) {
-        res.render("message-form", { title: "Create Message", message: message.message, errors: errors.array(), user: req.user })
+        res.render("message-form", { title: "Create Message", message: message, errors: errors.array(), user: req.user })
         return
     }
     await message.save()

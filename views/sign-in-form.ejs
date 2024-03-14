@@ -1,6 +1,5 @@
 <%-include('header',{title:title}) %>
   <body>
-    <%-include('accountBar',{title:title,user:typeof user === "undefined" ? undefined : user}) %>
     <div class="content-container">
         <div class="sign-in">
         <h1><%= title %></h1>
@@ -16,7 +15,7 @@
                     <input type="password" name="password" required id="password" placeholder="password">
                 </div>
                 <div class="form-input">
-                    <input type="submit" value="Submit">
+                    <input type="submit" value="Sign in">
                 </div>
             </div>
         </form>
