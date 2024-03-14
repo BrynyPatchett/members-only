@@ -5,7 +5,7 @@ const Message = require('../models/message');
 
 
 exports.index = asyncHandler(async (req, res) => {
-    const messages = await Message.find().sort({date:1}).populate("author",'firstname lastname').exec()
+    const messages = await Message.find().sort({ date: 1 }).populate("author", 'firstname lastname').exec()
     //load all messages from db, and pass them to the view
     //pass the user object to the view, will be undefined if not logged in 
     // view decides: Not logged in/ logged in not a member, show messages w/o names,
@@ -13,36 +13,57 @@ exports.index = asyncHandler(async (req, res) => {
     // member, sees names
     // admin sees delete option
     // console.log(req.user)
-    res.render("index", {title:"Messages",user:req.user,messages:messages})
+    res.render("index", { title: "Messages", user: req.user, messages: messages })
     // res.send("NOT IMPLEMENTED: Message Controller Index Page")
 })
 
-exports.message_get = (req, res,) =>{
-    res.render("message-form", {title:"Create Message",user:req.user})
+exports.message_get = (req, res,) => {
+    res.render("message-form", { title: "Create Message", user: req.user })
 }
 
-exports.message_post = [(req,res,next)=>{
-    if(req.user){
+exports.message_post = [(req, res, next) => {
+    if (req.user) {
         next()
-    }else{
+    } else {
         res.redirect('/messageboard/sign-in')
     }
 },
-body("message","Message must not be empty").trim().isLength({min:1, max: 200}).withMessage("Message must be between 1 and 200 characters").escape(),
-asyncHandler(async (req, res,) =>{
+body("message", "Message must not be empty").trim().isLength({ min: 1, max: 200 }).withMessage("Message must be between 1 and 200 characters").escape(),
+asyncHandler(async (req, res,) => {
     console.log(req.body.message.length)
     const errors = validationResult(req);
     const message = new Message({
         author: req.user._id,
         message: req.body.message,
-        title:'placeholder'
+        title: 'placeholder'
     })
     console.log(errors)
-    if(!errors.isEmpty()){
-        res.render("message-form",{title:"Create Message",message:message.message, errors:errors.array(),user:req.user})
+    if (!errors.isEmpty()) {
+        res.render("message-form", { title: "Create Message", message: message.message, errors: errors.array(), user: req.user })
         return
     }
     await message.save()
     console.log("Created message")
+    res.redirect("/messageboard")
+})]
+
+exports.delete_message_post = [(req, res, next) => {
+    if (req.user) {
+        next()
+    } else {
+        res.redirect('/messageboard/sign-in')
+    }
+},
+(req, res, next) => {
+    if (req.user.membership_status === 'Admin') {
+        next()
+    } else {
+        res.redirect('/messageboard')
+    }
+},
+asyncHandler(async (req, res) => {
+    const item = await Message.findByIdAndDelete(req.body.messageid)
+    console.log("DELETED")
+    console.log(item)
     res.redirect("/messageboard")
 })]

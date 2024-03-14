@@ -23,10 +23,13 @@
             <% }else{%>
               <div><i>anonymous</i></div>
             <% }%>
-            <div>date</div>
+            <div><%=message.formattedDate%></div>
             </div>
             <% if (user && user.membership_status === 'Admin') { %>
-            <div>Delete</div>
+              <form action="/messageboard/message/delete" method="post">
+                <input type="hidden" name="messageid" value="<%=message._id%>" >
+                <button type="submit" >delete</button>
+              </form>
             <% }%>
           </div>
           <div class="message-content"><%=message.message %></div>
