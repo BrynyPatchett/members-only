@@ -3,6 +3,7 @@ const { body, validationResult } = require("express-validator");
 const asyncHandler = require("express-async-handler")
 const bcrypt = require("bcryptjs")
 const passport = require("passport")
+var dotenv = require('dotenv')
 
 
 exports.signup_get = async (req, res) => {
@@ -74,9 +75,54 @@ exports.account_get = (req, res) => {
     res.render("account", { title: "Account", user:req.user })
 }
 
-exports.account_post = (req, res) => {
-    res.send("NOT IMPLEMENTD: UserController Account POST")
-}
+exports.account_post = [(req,res,next) => {
+    if(req.user){
+        next()
+    }else{
+        res.redirect('/messageboard/sign-in')
+    }
+},
+body("passphrase")
+.trim()
+.isLength({min:1})
+.withMessage("Passphrase must not be empty")
+.escape(),
+asyncHandler(async(req, res) => {
+    const errors= validationResult(req);
+    if(!errors.isEmpty()){
+        res.render("account",{ title: "Account", user:req.user,errors:errors.array() })
+        return
+    }
+
+    let membership_status
+
+    switch(req.body.passphrase){
+        case process.env.ADMINPASSPHRASE: 
+            membership_status = 'Admin'
+            break;
+        case process.env.MEMBERPASSPHRASE: 
+            membership_status = 'Member'
+            break;
+        default:
+            res.render("account",{ title: "Account", user:req.user,errors:[{msg:"Passpharse does not match"}]})
+            return;
+    }
+
+
+    const user = new User({
+        firstname: req.user.firstname,
+        lastname: req.user.lastname,
+        username: req.user.username,
+        password: req.user.password,
+        membership_status: membership_status,
+        _id: req.user.id
+      });
+
+
+      await User.findByIdAndUpdate(req.user.id,user);
+
+      res.render("account",{ title: "Account", user:user});
+})]
 
 exports.logout_post = (req, res,next) => {
     console.log(req.session)

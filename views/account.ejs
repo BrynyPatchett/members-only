@@ -12,26 +12,26 @@
           <%if (user.membership_status === 'User'){ %>  
             <div class="sign-in-form">
                 <div class="form-input">
-                    <label for="password">Membership Upgrade Passphrase</label>
-                    <input type="password" name="password" required id="password" placeholder="password">
+                    <label for="passphrase">Membership Upgrade Passphrase</label>
+                    <input type="password" name="passphrase" required id="passphrase" placeholder="passphrase">
                 </div>
                 <div class="form-input">
                     <input type="submit" value="Submit">
                 </div>
             </div>
             <% } %>
+            
         </form>
+        <%if(typeof errors != "undefined"){ %>
+          <% errors.forEach((error) => { %>
+              <p><%= error.msg%></p>
+          <% })%>
+        <% } %>
         </div>
         <% }else{ %>
             <p>Please <a href="/messageboard/sign-in">Sign in </a></p>
          <% } %>
+         
     </div>
-    <%if(typeof errors != "undefined"){ %>
-      <ul>
-      <% errors.forEach((error) => { %>
-          <li><%= error.msg%></li>
-      <% })%>
-      </ul>
-    <% } %>
   </body>
 </html>
