@@ -31,8 +31,8 @@ asyncHandler(async (req, res,next) => {
         res.render("sign-up-form", { title: "Sign up", user: user, errors:errors.array()})
         return
     }
-
-    const exists = await User.findOne({username:req.username});
+    console.log("here")
+    const exists = await User.findOne({username:req.body.username});
     if(exists != null){
         res.render("sign-up-form", { title: "Sign up", user: user, errors:[{msg:"Account with username already exists"}]})
         return;
